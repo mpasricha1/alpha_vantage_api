@@ -1,9 +1,11 @@
-import requests 
-import configparser
+import pandas as pd
+from AV_API import AV_API
 
-config = configparser.ConfigParser()
-config.read('config.ini')
+api = AV_API('TIME_SERIES_Daily','AMC','Full', 'Daily')
 
-api_key = config['API_Key']['api_key']
 
-print(api_key)
+data = api.call_api()
+
+df = pd.DataFrame(data)
+df_t = df.T
+print(df_t)
